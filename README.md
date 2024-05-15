@@ -9,6 +9,7 @@ Warning! Слабонервным не смотреть. Особенно Client
 1) admin@gmail.com
 2) advanced@gmail.ocm
 3) user@gmail.com
+
 Пароль для всех 123As!
 
 В качестве бд успользуется MS Sql Server, а если точнее, то движок для разработки sql express или как он там... localdb, короче)
