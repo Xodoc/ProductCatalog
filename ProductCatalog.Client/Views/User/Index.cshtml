@@ -1,0 +1,34 @@
+﻿@model List<ProductCatalog.Client.Models.UserModel>
+<h2>User List</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>IsBlocked</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.LockoutEnabled</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a> |
+                    <a asp-action="Block" asp-route-id="@user.Id">Block</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

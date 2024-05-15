@@ -1,0 +1,56 @@
+﻿@model ProductCatalog.Client.Models.CreateProductRequest
+
+<h2>Create Product</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger" role="alert">
+        Please correct the following errors:
+        <ul>
+            @foreach (var key in ViewData.ModelState.Keys)
+            {
+                foreach (var error in ViewData.ModelState[key].Errors)
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            }
+        </ul>
+    </div>
+}
+
+<form asp-controller="Product" asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId">CategoryId:</label>
+        <input asp-for="CategoryId" class="form-control" />
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description:</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CostInRubles">Cost (Rubles):</label>
+        <input asp-for="CostInRubles" class="form-control" />
+        <span asp-validation-for="CostInRubles" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GeneralNote">General Note:</label>
+        <textarea asp-for="GeneralNote" class="form-control"></textarea>
+        <span asp-validation-for="GeneralNote" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SpecialNote">Special Note:</label>
+        <textarea asp-for="SpecialNote" class="form-control"></textarea>
+        <span asp-validation-for="SpecialNote" class="text-danger"></span>
+    </div>
+    <div class="form-group" style="margin-top: 20px;">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+    @Html.AntiForgeryToken()
+</form>

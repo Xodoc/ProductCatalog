@@ -1,0 +1,42 @@
+﻿@model UpdateProductRequest
+
+<h2>Edit Product</h2>
+
+<form asp-controller="Product" asp-action="EditConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId">Category:</label>
+        <input asp-for="CategoryId" class="form-control"/>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description:</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CostInRubles">Cost (Rubles):</label>
+        <input asp-for="CostInRubles" class="form-control" />
+        <span asp-validation-for="CostInRubles" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GeneralNote">General Note:</label>
+        <textarea asp-for="GeneralNote" class="form-control"></textarea>
+        <span asp-validation-for="GeneralNote" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SpecialNote">Special Note:</label>
+        <textarea asp-for="SpecialNote" class="form-control"></textarea>
+        <span asp-validation-for="SpecialNote" class="text-danger"></span>
+    </div>
+    <div class="form-group" style="margin-top: 20px;">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+    @Html.AntiForgeryToken()
+</form>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+    var msg = TempData["msg"];
+
+    if (msg is not null)
+    {
+        @Html.Raw(msg)
+    }
+}
+<form asp-controller="Home" asp-action="Login" method="post">
+    <div class="text-center">
+        <div>
+            <div id="loginForm">
+                <h3>Login</h3>
+                <label>Input email</label><br />
+                <input type="email" id="email" name="Email" /> <br /><br />
+                <label>Input password</label><br />
+                <input type="password" id="password" name="Password" /><br /><br />
+                <button type="submit">Login</button>
+            </div>
+        </div>
+    </div>
+</form>

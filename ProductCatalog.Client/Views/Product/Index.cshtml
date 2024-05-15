@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ProductModel>
+<h2>Product List</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Наименование продукта</th>
+            <th>Категория</th>
+            <th>Описание</th>
+            <th>Стоимость в рублях</th>
+            <th>Примечание общее</th>
+            <th>Примечание специальное</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.CategoryName</td>
+                <td>@user.Description</td>
+                <td class="ruble-price">
+                    <span class="ruble-value" data-rubles="@user.CostInRubles">@user.CostInRubles</span>
+                    <span class="currency-symbol">*</span>
+                </td>
+                <td>@user.GeneralNote</td>
+                <td>@user.SpecialNote</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function getExchangeRate() {        
+        fetch('/Product/GetExchangeRate')
+            .then(response => response.json())
+            .then(data => {
+                
+                const dollarElements = document.querySelectorAll('.ruble-value');
+                const exchangeRate = data.exchangeRate;
+
+                dollarElements.forEach(element => {                    
+                    const rubles = parseFloat(element.dataset.rubles);                   
+                    const dollars = rubles / exchangeRate;
+                    
+                    element.textContent = dollars.toFixed(2);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching exchange rate:', error);
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const currencySymbol = document.querySelectorAll('.currency-symbol');
+
+        currencySymbol.forEach(symbol => {
+            symbol.addEventListener('mouseover', function () {
+                getExchangeRate();
+            });
+        });
+    });
+</script>
